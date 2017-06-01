@@ -1200,71 +1200,99 @@ void explosion(int vet[dim][dim])
 
 }
 
-void proiettile(int vet[dim][dim],int sound)           // funzione che calcola i movimenti dei proiettili saprati sia dal giocatore che dal nemico
+void bullet(int vet[dim][dim],int sound)           
+//A function that calculates the movements of the projectiles fired 
+//by both the player and the enemy
 {
     int i,l;
-    for(i=0;i<dim;i++){
-        for(l=0;l<dim;l++){
-            if(vet[i][l]==1){
-                    if(i==1){               // cerco i proiettili del giocatore e li faccio avanzare
+    for(i=0;i<dim;i++)
+	{
+        for(l=0;l<dim;l++)
+		{
+            if(vet[i][l]==1)
+			{
+                    if(i==1)
+					{              
+						// I look for the bullets of the player and make them move forward
                         vet[i][l]=0;
-                    }else {
+                    }
+					else 
+					{
                       vet[i][l]=0;
                       vet[i-1][l]=1;
                     }
             }
         }
     }
-    for(i=dim-2;i>0;i--){
-        for(l=0;l<dim;l++){
-            if(vet[i][l]==5){         // cerco i proiettili nemici e li faccio avanzare
-                if(i==dim-2){
+    for(i=dim-2;i>0;i--)
+	{
+        for(l=0;l<dim;l++)
+		{
+            if(vet[i][l]==5)
+			{         
+				//I look for enemy bullets and advance them
+                if(i==dim-2)
+				{
                     vet[i][l]=0;
-                }else{
+                }
+				else
+				{
                     vet[i][l]=0;
                     vet[i+1][l]=5;
                 }
             }
         }
     }
-    for(i=dim-2;i>0;i--){                // bombe bombardieri
-        for(l=0;l<dim;l++){
-            if(vet[i][l]==8){         // cerco i proiettili nemici e li faccio avanzare
-                if(i==dim-2){
+    for(i=dim-2;i>0;i--)
+	{//Bomb bombers
+        for(l=0;l<dim;l++)
+		{
+            if(vet[i][l]==8)
+			{//I look for enemy bullets and advance them
+                if(i==dim-2)
+				{
                     vet[i][l]=4;
-                    vet[i][l-1]=4;        //toccano il fondo esplodono
+                    vet[i][l-1]=4;        //Touch the bottom explode
                     vet[i][l+1]=4;
-                    if (sound==1){
-                    Beep(150,50);
+                    if (sound==1)
+					{
+						Beep(150,50);
                     }
-                }else{
+                }
+				else
+				{
                     vet[i][l]=0;
                     vet[i+1][l]=8;
                 }
             }
         }
     }
-     for(i=dim-2;i>0;i--){                // bombe boss2
-        for(l=0;l<dim;l++){
-            if(vet[i][l]==15){         // cerco i proiettili e li faccio avanzare
-                if(i==dim-2){
+     for(i=dim-2;i>0;i--)
+	 {// Bombs boss2
+        for(l=0;l<dim;l++)
+		{
+            if(vet[i][l]==15)
+			{// I look for the bullets and make them move forward
+                if(i==dim-2)
+				{
                     vet[i][l]=4;
                     vet[i][l-1]=4;
-                    vet[i][l-2]=4;    //toccano il fondo esplodono
+                    vet[i][l-2]=4;    //Touch the bottom explode
                     vet[i][l+1]=4;
                     vet[i][l+2]=4;
-                    if (sound==1){
-                    Beep(150,50);
+                    if (sound==1)
+					{
+						 Beep(150,50);
                     }
-                }else{
+                }
+				else
+				{
                     vet[i][l]=0;
                     vet[i+1][l]=15;
                 }
             }
         }
     }
-
-
 
 }
 
@@ -1477,7 +1505,7 @@ printf("\n     SPACE INVATERS v0.4                   \n");
 
                      clear_screen();
                      draws_screen(cate,score,life,level);
-                     proiettile(cate,sound);
+                     bullet(cate,sound);
 
                      victory=Victory_condition(cate);
 
