@@ -887,12 +887,13 @@ void move_player(int vet[dim][dim],int azione,int sound)
 
 }
 
-void livelli(int vet[dim][dim],int lv)
+void game_level(int vet[dim][dim],int lv)
 {
     int i,l;
 
+	// Empty the field
     for(i=0;i<dim;i++){
-        for(l=0;l<dim;l++){               // Svuoto il campo
+        for(l=0;l<dim;l++){               
             vet[i][l]=0;
         }
     }
@@ -903,9 +904,9 @@ void livelli(int vet[dim][dim],int lv)
     vet[dim-2][(dim/2)-1]=2;
     vet[3][10]=3;
 
-
+	//Insert enemies by algorithm
      for(i=1;i<2;i++){
-        for(l=1;l<dim-1;l++){          //Inserisco i nemici secondo un algoritmo
+        for(l=1;l<dim-1;l++){          
             vet[i][l]=3;
             l++;
         }
@@ -915,15 +916,18 @@ void livelli(int vet[dim][dim],int lv)
     case 2:
     vet[dim-2][(dim/2)-1]=2;
 
+	//Insert enemies by algorithm
      for(i=1;i<3;i++){
         if(i==1){
-         for(l=1;l<dim-1;l++){          //Inserisco i nemici secondo un algoritmo
+         for(l=1;l<dim-1;l++){          
             vet[i][l]=3;
             l++;
         }
         }
+
+		//Insert enemies by algorithm
         if(i==2){
-            for(l=2;l<dim-1;l++){          //Inserisco i nemici secondo un algoritmo
+            for(l=2;l<dim-1;l++){         
             vet[i][l]=3;
             l++;
         }
@@ -934,9 +938,9 @@ void livelli(int vet[dim][dim],int lv)
     vet[dim-2][(dim/2)-1]=2;
     vet[3][10]=7;
 
-
+	//Insert enemies by algorithm
      for(i=1;i<2;i++){
-        for(l=1;l<dim-1;l++){          //Inserisco i nemici secondo un algoritmo
+        for(l=1;l<dim-1;l++){          
             vet[i][l]=7;
             l++;
         }
@@ -953,9 +957,9 @@ void livelli(int vet[dim][dim],int lv)
         vet[dim-2][(dim/2)-1]=2;
         vet[3][10]=12;
 
-
+		//Insert enemies by algorithm
        for(i=1;i<2;i++){
-          for(l=1;l<dim-1;l++){          //Inserisco i nemici secondo un algoritmo
+          for(l=1;l<dim-1;l++){          
               vet[i][l]=12;
               l++;
           }
@@ -965,15 +969,17 @@ void livelli(int vet[dim][dim],int lv)
     case 6:
          vet[dim-2][(dim/2)-1]=2;
 
+	//Insert enemies by algorithm
      for(i=1;i<3;i++){
         if(i==1){
-         for(l=1;l<dim-1;l++){          //Inserisco i nemici secondo un algoritmo
+         for(l=1;l<dim-1;l++){          
             vet[i][l]=12;
             l++;
         }
         }
+	//Insert enemies by algorithm
         if(i==2){
-            for(l=2;l<dim-1;l++){          //Inserisco i nemici secondo un algoritmo
+            for(l=2;l<dim-1;l++){       
             vet[i][l]=12;
             l++;
         }
@@ -989,19 +995,22 @@ void livelli(int vet[dim][dim],int lv)
         vet[dim-2][(dim/2)-1]=2;
          for(i=1;i<4;i++){
         if(i==1){
-         for(l=1;l<dim-1;l++){          //Inserisco i nemici secondo un algoritmo
+		//Insert enemies by algorithm
+         for(l=1;l<dim-1;l++){          
             vet[i][l]=3;
             l++;
         }
         }
         if(i==2){
-            for(l=2;l<dim-1;l++){          //Inserisco i nemici secondo un algoritmo
+			//Insert enemies by algorithm
+            for(l=2;l<dim-1;l++){        
             vet[i][l]=3;
             l++;
         }
         }
         if(i==3){
-            for(l=1;l<dim-1;l++){          //Inserisco i nemici secondo un algoritmo
+			//Insert enemies by algorithm
+            for(l=1;l<dim-1;l++){         
             vet[i][l]=3;
             l++;
         }
@@ -1012,19 +1021,22 @@ void livelli(int vet[dim][dim],int lv)
         vet[dim-2][(dim/2)-1]=2;
          for(i=1;i<4;i++){
         if(i==1){
-         for(l=1;l<dim-1;l++){          //Inserisco i nemici secondo un algoritmo
+		//Insert enemies by algorithm
+         for(l=1;l<dim-1;l++){         
             vet[i][l]=12;
             l++;
         }
         }
         if(i==2){
-            for(l=2;l<dim-1;l++){          //Inserisco i nemici secondo un algoritmo
+			//Insert enemies by algorithm
+            for(l=2;l<dim-1;l++){         
             vet[i][l]=12;
             l++;
         }
         }
         if(i==3){
-            for(l=1;l<dim-1;l++){          //Inserisco i nemici secondo un algoritmo
+			//Insert enemies by algorithm
+            for(l=1;l<dim-1;l++){         
             vet[i][l]=12;
             l++;
         }
@@ -1036,13 +1048,15 @@ void livelli(int vet[dim][dim],int lv)
 
      for(i=1;i<3;i++){
         if(i==1){
-         for(l=1;l<dim-1;l++){          //Inserisco i nemici secondo un algoritmo
+		//Insert enemies by algorithm
+         for(l=1;l<dim-1;l++){          
             vet[i][l]=7;
             l++;
         }
         }
         if(i==2){
-            for(l=2;l<dim-1;l++){          //Inserisco i nemici secondo un algoritmo
+			//Insert enemies by algorithm
+            for(l=2;l<dim-1;l++){          
             vet[i][l]=7;
             l++;
         }
@@ -1398,7 +1412,7 @@ printf("\n     SPACE INVATERS v0.4                   \n");
              {
 
                  system("cls");
-                 livelli(cate,level);    // Select the level with the function
+                 game_level(cate,level);    // Select the level with the function
                  victory=0;
                  disegna_schermo(cate,score,life,level);      // Design the game screen and look before the start of the game
 
