@@ -57,6 +57,7 @@ void set_color(short Color)
   HANDLE hCon = GetStdHandle(STD_OUTPUT_HANDLE); // Funzione che mi permette di cambiare colore del testo;
   SetConsoleTextAttribute(hCon,Color);
 }
+
 void boss(int vet[dim][dim],int dif)
 {
     int i,l,num,flag,k,spara;
@@ -425,7 +426,8 @@ void ia_boss2(int vet[dim][dim],int dif)
 
 }
 
-void intelligenza_artificiale(int vet[dim][dim],int dif)         // Funzione che gestisce le mosse del computer per ogni navicella avversaria
+void artificial_intelligence (int vet[dim][dim],int dif) 
+// Function that manages computer moves for each opposing ship
 {
     int i,l,num,flag,k,spara;
 
@@ -442,8 +444,8 @@ void intelligenza_artificiale(int vet[dim][dim],int dif)         // Funzione che
                     }else{
                         vet[i][l-1]=13;
                     }
-                    vet[i][l]=0;                         // questi due if servono perchè la navicella eviti un proiettile del compagno, se è possibile
-
+                    vet[i][l]=0;                        
+// These two if they serve because the ship avoids a bullet bullet if it is possible.
                 }else if(vet[i-1][l]==5&&vet[i][l+1]==0)
                 {
                      if(vet[i][l]==3){
@@ -459,7 +461,8 @@ void intelligenza_artificiale(int vet[dim][dim],int dif)         // Funzione che
 
 
 
-                num=1+rand()%dif;                           //genero un numero random che provoca diversi comportamneti
+                num=1+rand()%dif;                           
+// I generate a random number that causes different behaviors.
 
 
                 if(num==1){
@@ -468,18 +471,20 @@ void intelligenza_artificiale(int vet[dim][dim],int dif)         // Funzione che
                        vet[i][l-1]=6;
                     }else{
                         vet[i][l-1]=13;
-                    }                // comportmaneto 1: va a sinistra oppure se non può spara
+                    }               // Behave 1: go left or if he can not shoot
                         vet[i][l]=0;
 
                     }else{
                         flag=0;
                     for(k=i+1;k<dim;k++){
-                        if(vet[k][l]==3||vet[k][l]==6||vet[k][l]==12||vet[k][l]==13){    //controlla se ha la traiettoria di tiro libera, se ha un compagno davanti restituisce 1
+                        if(vet[k][l]==3||vet[k][l]==6||vet[k][l]==12||vet[k][l]==13){    
+// Check if he has the free throw trajectory, if he has a front mate returns 1
                             flag=1;
                         }
                     }
                     if(flag==0){
-                            spara=1+rand()%10;            // genera un numero fra 1 e 10 , se è pari lo sparo va a buon fine, altrimenti non spara
+                            spara=1+rand()%10;           
+// Generates a number between 1 and 10, if it is equal the shot fails, otherwise it does not shoot.
                     if(spara%2==0){
                             if(vet[i+2][l]==0){
                                 vet[i+1][l]=5;
@@ -494,7 +499,8 @@ void intelligenza_artificiale(int vet[dim][dim],int dif)         // Funzione che
                     }
 
                 }
-                if(num==2){                            // comportamento 2: va su, e se non può spara
+                if(num==2){                           
+// Behavior 2: go on, and if it can not shoot
                     if(vet[i-1][l]==0&&i!=1){
                     if(vet[i][l]==3){
                        vet[i-1][l]=6;
@@ -533,7 +539,8 @@ void intelligenza_artificiale(int vet[dim][dim],int dif)         // Funzione che
                        vet[i][l+1]=6;
                     }else{
                         vet[i][l+1]=13;
-                    }                                      // comportamento 3: va a destra, e se non può spara
+                    }                                    
+// Behavior 3: Go to the right, and if he can not shoot	
                         vet[i][l]=0;
 
                     }else{
@@ -567,8 +574,8 @@ void intelligenza_artificiale(int vet[dim][dim],int dif)         // Funzione che
                     }else{
                         vet[i+1][l]=13;
                     }
-                        vet[i][l]=0;                      // comportamento 4: va giu, e se non può spara
-
+                        vet[i][l]=0;                      
+// Behavior 4: go down, and if he can not shoot
                     }else{
                         flag=0;
                     for(k=i+1;k<dim;k++){
@@ -596,7 +603,8 @@ void intelligenza_artificiale(int vet[dim][dim],int dif)         // Funzione che
                 if(num==5){
                     flag=0;
                     for(k=i+1;k<dim;k++){
-                        if(vet[k][l]==3||vet[k][l]==6||vet[k][l]==12||vet[k][l]==13){    // comportamento 5: spara, ovviamente evitando se davanti a se ha un alleato
+                        if(vet[k][l]==3||vet[k][l]==6||vet[k][l]==12||vet[k][l]==13){    
+//Behavior 5: shoot, obviously avoiding if in front of you has an ally.
                             flag=1;
                         }
                     }
@@ -620,14 +628,15 @@ void intelligenza_artificiale(int vet[dim][dim],int dif)         // Funzione che
             }
         }
     }
-    // INTELLIGENZA BOMBARDIERE
+// BOMBARDIERE INTELLIGENCE
     for(i=0;i<dim;i++){
         for(l=0;l<dim;l++){
             if(vet[i][l]==7)
             {
                 if(vet[i-1][l]==8&&vet[i][l-1]==0)
                 {
-                    vet[i][l]=0;                             // questi due if servono perchè la navicella eviti un proiettile del compagno, se è possibile
+                    vet[i][l]=0;                           
+// These two if they serve because the ship avoids a bullet bullet if it is possible.
                     vet[i][l-1]=9;
                 }else if(vet[i-1][l]==8&&vet[i][l+1]==0)
                 {
@@ -639,22 +648,25 @@ void intelligenza_artificiale(int vet[dim][dim],int dif)         // Funzione che
 
 
 
-                num=1+rand()%dif;                           //genero un numero random che provoca diversi comportamneti
-
-
+                num=1+rand()%dif;                           
+// I generate a random number that causes different behaviors.
                 if(num==1){
-                    if(vet[i][l-1]==0&&l!=1){              // comportmaneto 1: va a sinistra oppure se non può spara
+                    if(vet[i][l-1]==0&&l!=1){             
+// Behave 1: go left or if he can not shoot
                         vet[i][l]=0;
                         vet[i][l-1]=9;
                     }else{
                         flag=0;
                     for(k=i+1;k<dim;k++){
-                        if(vet[k][l]==7||vet[k][l]==9){    //controlla se ha la traiettoria di tiro libera, se ha un compagno davanti restituisce 1
+                        if(vet[k][l]==7||vet[k][l]==9){    
+// Check if he has the free throw trajectory, if he has a front mate returns 1
                             flag=1;
                         }
                     }
                     if(flag==0){
-                            spara=1+rand()%10;            // genera un numero fra 1 e 10 , se è pari lo sparo va a buon fine, altrimenti non spara
+                            spara=1+rand()%10;           
+ // Generates a number between 1 and 10, if it is equal the shot fails, otherwise it does not shoot
+
                     if(spara>7){
                       if(vet[i+2][l]==0){
                         vet[i+1][l]=8;
@@ -665,7 +677,8 @@ void intelligenza_artificiale(int vet[dim][dim],int dif)         // Funzione che
                     }
 
                 }
-                if(num==2){                            // comportamento 2: va su, e se non può spara
+                if(num==2){                           
+ // Behavior 2: go on, and if it can not shoot
                     if(vet[i-1][l]==0&&i!=1){
                         vet[i][l]=0;
                         vet[i-1][l]=9;
@@ -690,7 +703,8 @@ void intelligenza_artificiale(int vet[dim][dim],int dif)         // Funzione che
 
                 }
                 if(num==3){
-                    if(vet[i][l+1]==0&&l!=dim-2){         // comportamento 3: va a destra, e se non può spara
+                    if(vet[i][l+1]==0&&l!=dim-2){         
+// Behavior 3: Go to the right, and if he can not shoot
                         vet[i][l]=0;
                         vet[i][l+1]=9;
                     }else{
@@ -716,7 +730,8 @@ void intelligenza_artificiale(int vet[dim][dim],int dif)         // Funzione che
                 if(num==4){
                     if(vet[i+1][l]==0&&i!=(dim/2)-2){
                         vet[i][l]=0;
-                        vet[i+1][l]=9;                // comportamento 4: va giu, e se non può spara
+                        vet[i+1][l]=9;                
+//Behavior 4: go down, and if he can not shoot
                     }else{
                         flag=0;
                     for(k=i+1;k<dim;k++){
@@ -739,7 +754,8 @@ void intelligenza_artificiale(int vet[dim][dim],int dif)         // Funzione che
                 if(num==5){
                     flag=0;
                     for(k=i+1;k<dim;k++){
-                        if(vet[k][l]==7||vet[k][l]==9){    // comportamento 5: spara, ovviamente evitando se davanti a se ha un alleato
+                        if(vet[k][l]==7||vet[k][l]==9){    
+// Behavior 5: shoot, obviously avoiding if in front of you has an ally
                             flag=1;
                         }
                     }
@@ -775,16 +791,19 @@ void intelligenza_artificiale(int vet[dim][dim],int dif)         // Funzione che
 
 }
 
-int condizione_vittoria(int vet[dim][dim])            // Funzione per verificare la condizione di vittoria o sconfitta del giocatore
+int condizione_vittoria(int vet[dim][dim])            
+// Function to verify the player's win or defeat condition
 {
-    int i,l,flag=0,giocatore=0;                         // inizializzo variabili
+    int i,l,flag=0,giocatore=0;                         // Variable initialization
 
     for(i=0;i<dim;i++){
         for(l=0;l<dim;l++){
-            if(vet[i][l]==3||vet[i][l]==7||vet[i][l]==10||vet[i][l]==12||vet[i][l]==14){                           //cerco la presenza sia del giocatore che dei nemici sul campo di gioco
-                flag=1;                                 // c'è un flag se trovo un nemico
+            if(vet[i][l]==3||vet[i][l]==7||vet[i][l]==10||vet[i][l]==12||vet[i][l]==14){                          
+  // I seek the presence of both the player and the enemy on the playing field
+                flag=1; 					// There is a flag if I find an enemy
+
             }if(vet[i][l]==2){
-                giocatore=1;                            // un altro flag se trovo il giocatore
+                giocatore=1; 				// Another flag if I find the player
             }
         }
     }
@@ -792,7 +811,8 @@ int condizione_vittoria(int vet[dim][dim])            // Funzione per verificare
     if(flag==1&&giocatore==1)
     {
         return 0;
-    }else if(flag==0&&giocatore==1){                   //Secondo chi è stato trovato sul campo la funzione restituisce valori differenti
+    }else if(flag==0&&giocatore==1){                 
+// According to who was found on the field, the function returns different values
         return 1;
     }else if(flag==1&&giocatore==0){
         return 2;
