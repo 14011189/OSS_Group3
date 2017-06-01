@@ -1214,41 +1214,46 @@ void proiettile(int vet[dim][dim],int sound)           // funzione che calcola i
 
 }
 
-int colpito(int vet[dim][dim],int sound)          // funzione che controlla se un nemico o il giocatore è stato colpito, e nel caso cambia il suo valore con quello dell'esplosione
-{
-    int i,l,punt=0;                   // variabili fra cui quella del punteggio
+int attacked(int vet[dim][dim],int sound) //Function that controls whether an enemy or player has been hit, and if it changes its value
 
+{
+    int i,l,point=0;     //Variables including the score
+
+    //Enemy
     for(i=0;i<dim;i++){
         for(l=0;l<dim;l++){
             if((vet[i][l]==3&&vet[i+1][l]==1)||(vet[i][l]==12&&vet[i+1][l]==1)){
+         // Check if the enemy has been hit, if it turns into explosion and beeps and adds score
                 if(vet[i][l]==12){
                     vet[i][l]=3;
                     vet[i+1][l]=0;
-                    punt+=2;
+                    point+=2;
                      if (sound==1){
                     Beep(150,25);
                 }
                 }else{
 
-                vet[i][l]=4;                       // controlla se il nemico è stato colpito, se si lo trasforma in esplosione e fa beep e aggiunge punteggio
+                vet[i][l]=4;
+
                 vet[i+1][l]=0;
-                punt+=2;
+                point+=2;
                 if (sound==1){
                 Beep(250,50);
                 }
                 }
 
             }else if(vet[i][l]==7&&vet[i+1][l]==1){
-                vet[i][l]=4;                       // controlla se il nemico bombardiere è stato colpito, se si lo trasforma in esplosione e fa beep
+                vet[i][l]=4;    // Check if the bomber enemy has been hit, if it turns into explosion and beeps
+
                 vet[i+1][l]=0;
-                punt+=3;
+                point+=3;
                 if (sound==1){
                 Beep(250,50);
                 }
         }else if((vet[i][l]==10&&vet[i+1][l]==1)||(vet[i][l]==14&&vet[i+1][l]==1)){
-                vet[i][l]=4;                       // controlla se il boss è stato colpito
+                vet[i][l]=4;    // Check if the boss was hit
                 vet[i+1][l]=0;
-                punt+=25;
+                point+=25;
                 if (sound==1){
                 Beep(250,50);
                 }
@@ -1256,32 +1261,26 @@ int colpito(int vet[dim][dim],int sound)          // funzione che controlla se u
     }
     }
 
+    // Player
     for(i=dim-2;i>0;i--){
         for(l=0;l<dim;l++){
-            if(vet[i][l]==2&&vet[i-1][l]==5){       // controlla se è stato colpito il giocatore
+            if(vet[i][l]==2&&vet[i-1][l]==5){       // Check if the player was hit
                 vet[i][l]=4;
                 vet[i-1][l]=0;
                 if (sound==1){
                 Beep(250,50);
                 }
             }
-             if(vet[i][l]==2&&vet[i-1][l]==8){       // controlla se è stato colpito il giocatore dalle bombe
+             if(vet[i][l]==2&&vet[i-1][l]==8){       // Check if the player was hit by the bombs
+
                 vet[i][l]=4;
                 vet[i-1][l]=0;
                 if (sound==1){
                 Beep(250,50);
                 }
                 }
-            if(vet[i][l]==2&&vet[i-1][l-1]==8){       // controlla se è stato colpito il giocatore dalle bombe
-                vet[i][l]=4;
-                vet[i-1][l]=0;
-                vet[i][l-1]=4;
-                vet[i][l+1]=4;
-                if (sound==1){
-                Beep(250,50);
-                }
-                }
-            if(vet[i][l]==2&&vet[i-1][l+1]==8){       // controlla se è stato colpito il giocatore dalle bombe
+            if(vet[i][l]==2&&vet[i-1][l-1]==8){       // Check if the player was hit by the bombs
+
                 vet[i][l]=4;
                 vet[i-1][l]=0;
                 vet[i][l-1]=4;
@@ -1290,7 +1289,18 @@ int colpito(int vet[dim][dim],int sound)          // funzione che controlla se u
                 Beep(250,50);
                 }
                 }
-            if(vet[i][l]==2&&vet[i-1][l]==15){       // controlla se è stato colpito il giocatore dalle bombe del boss
+            if(vet[i][l]==2&&vet[i-1][l+1]==8){       // Check if the player was hit by the bombs
+
+                vet[i][l]=4;
+                vet[i-1][l]=0;
+                vet[i][l-1]=4;
+                vet[i][l+1]=4;
+                if (sound==1){
+                Beep(250,50);
+                }
+                }
+            if(vet[i][l]==2&&vet[i-1][l]==15){       // Check if the boss bomb was hit by the boss
+
                 vet[i][l]=4;
                 vet[i-1][l]=0;
                 if (sound==1){
@@ -1300,10 +1310,11 @@ int colpito(int vet[dim][dim],int sound)          // funzione che controlla se u
         }
     }
 
-    return punt;
+    return point;
 
 
 }
+
 
 int main()                                    // funzione principale del gioco
 {
