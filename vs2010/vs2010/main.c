@@ -426,7 +426,7 @@ void ia_boss2(int vet[dim][dim],int dif)
 
 }
 
-void artificial_intelligence (int vet[dim][dim],int dif) 
+void artificial_intelligence(int vet[dim][dim],int dif) 
 // Function that manages computer moves for each opposing ship
 {
     int i,l,num,flag,k,spara;
@@ -791,7 +791,7 @@ void artificial_intelligence (int vet[dim][dim],int dif)
 
 }
 
-int condizione_vittoria(int vet[dim][dim])            
+int victory_condition(int vet[dim][dim])            
 // Function to verify the player's win or defeat condition
 {
     int i,l,flag=0,giocatore=0;                         // Variable initialization
@@ -1076,81 +1076,115 @@ void game_level(int vet[dim][dim],int lv)
 
 }
 
-void disegna_schermo(int vet[dim][dim],int punt,int vit,int lv)                   // Funzione che disegna il campo di gioco da un vettore[n][n]
+void draws_screen(int vet[dim][dim],int point,int life,int lv)                  
+//Function that draws the playing field from a vector [n] [n]
 {
     int i,l;
 
-    printf(" vite: %d       (%d)     punteggio: %d",vit,lv,punt);
+    printf(" life: %d       (%d)     score: %d",life,lv,point);
 
     for(i=0;i<dim;i++){
             printf("\n");
         for(l=0;l<dim;l++){
 
-            if(i==0){
-                printf(" -");                             //secondo quali valori trova nel vettore sa se disegnare il giocatore, i nemici o gli altri aspetti grafici
-            }else if(i==dim-1){
+            if(i==0)
+			{
+                printf(" -");                            
+				//According to which values in the vector knows whether to draw the player, 
+				//the enemies or other graphic aspects
+            }
+			else if(i==dim-1)
+			{
                 printf(" -");
-            }else if(l==0){
-                printf(" | ");
-            }else if(l==dim-1){
+            }
+			else if(l==0)
+			{
                 printf(" | ");
             }
-            else if(vet[i][l]==0){
+			else if(l==dim-1)
+			{
+                printf(" | ");
+            }
+            else if(vet[i][l]==0)
+			{
                 printf("  ");
-            }else if(vet[i][l]==1){
+            }
+			else if(vet[i][l]==1)
+			{
                 printf(" |");
-            }else if(vet[i][l]==2){
+            }
+			else if(vet[i][l]==2)
+			{
                 set_color(11);
                 printf(" A");
                 set_color(15);
-            }else if(vet[i][l]==3){
+            }
+			else if(vet[i][l]==3)
+			{
                 set_color(14);
                 printf(" W");
                 set_color(15);
-            }else if(vet[i][l]==4){
+            }
+			else if(vet[i][l]==4)
+			{
                 set_color(12);
                 printf(" @");
                 set_color(15);
-            }else if(vet[i][l]==5){
+            }
+			else if(vet[i][l]==5)
+			{
                 set_color(6);
                 printf(" U");
                 set_color(15);
-            }else if(vet[i][l]==7){
+            }
+			else if(vet[i][l]==7)
+			{
                 set_color(2);
                 printf(" V");
                 set_color(15);
-            }else if(vet[i][l]==8){
+            }
+			else if(vet[i][l]==8)
+			{
                 set_color(10);
                 printf(" o");
                 set_color(15);
-            }else if(vet[i][l]==10){
+            }
+			else if(vet[i][l]==10)
+			{
                 set_color(3);
                 printf(" Y");
                 set_color(15);
-            }else if(vet[i][l]==12){
+            }
+			else if(vet[i][l]==12)
+			{
                 set_color(4);
                 printf(" W");
                 set_color(15);
-            }else if(vet[i][l]==14){
+            }
+			else if(vet[i][l]==14)
+			{
                 set_color(5);
                 printf(" X");
                 set_color(15);
-            }else if(vet[i][l]==15){
+            }
+			else if(vet[i][l]==15)
+			{
                 set_color(14);
                 printf(" *");
                 set_color(15);
-            }else if(vet[i][l]==16){
+            }
+			else if(vet[i][l]==16)
+			{
                 set_color(12);
                 printf(" @");
                 set_color(15);
             }
         }
     }
-
-
 }
 
-void esplosione(int vet[dim][dim])                       // funzione che cancella le esplosioni dal vattore del campo una volta innescate
+void explosion(int vet[dim][dim])                       
+//Function that erases the explosion from the field vector when triggered
 {
     int i,l;
     for(i=0;i<dim;i++){
@@ -1166,71 +1200,99 @@ void esplosione(int vet[dim][dim])                       // funzione che cancell
 
 }
 
-void proiettile(int vet[dim][dim],int sound)           // funzione che calcola i movimenti dei proiettili saprati sia dal giocatore che dal nemico
+void bullet(int vet[dim][dim],int sound)           
+//A function that calculates the movements of the projectiles fired 
+//by both the player and the enemy
 {
     int i,l;
-    for(i=0;i<dim;i++){
-        for(l=0;l<dim;l++){
-            if(vet[i][l]==1){
-                    if(i==1){               // cerco i proiettili del giocatore e li faccio avanzare
+    for(i=0;i<dim;i++)
+	{
+        for(l=0;l<dim;l++)
+		{
+            if(vet[i][l]==1)
+			{
+                    if(i==1)
+					{              
+						// I look for the bullets of the player and make them move forward
                         vet[i][l]=0;
-                    }else {
+                    }
+					else 
+					{
                       vet[i][l]=0;
                       vet[i-1][l]=1;
                     }
             }
         }
     }
-    for(i=dim-2;i>0;i--){
-        for(l=0;l<dim;l++){
-            if(vet[i][l]==5){         // cerco i proiettili nemici e li faccio avanzare
-                if(i==dim-2){
+    for(i=dim-2;i>0;i--)
+	{
+        for(l=0;l<dim;l++)
+		{
+            if(vet[i][l]==5)
+			{         
+				//I look for enemy bullets and advance them
+                if(i==dim-2)
+				{
                     vet[i][l]=0;
-                }else{
+                }
+				else
+				{
                     vet[i][l]=0;
                     vet[i+1][l]=5;
                 }
             }
         }
     }
-    for(i=dim-2;i>0;i--){                // bombe bombardieri
-        for(l=0;l<dim;l++){
-            if(vet[i][l]==8){         // cerco i proiettili nemici e li faccio avanzare
-                if(i==dim-2){
+    for(i=dim-2;i>0;i--)
+	{//Bomb bombers
+        for(l=0;l<dim;l++)
+		{
+            if(vet[i][l]==8)
+			{//I look for enemy bullets and advance them
+                if(i==dim-2)
+				{
                     vet[i][l]=4;
-                    vet[i][l-1]=4;        //toccano il fondo esplodono
+                    vet[i][l-1]=4;        //Touch the bottom explode
                     vet[i][l+1]=4;
-                    if (sound==1){
-                    Beep(150,50);
+                    if (sound==1)
+					{
+						Beep(150,50);
                     }
-                }else{
+                }
+				else
+				{
                     vet[i][l]=0;
                     vet[i+1][l]=8;
                 }
             }
         }
     }
-     for(i=dim-2;i>0;i--){                // bombe boss2
-        for(l=0;l<dim;l++){
-            if(vet[i][l]==15){         // cerco i proiettili e li faccio avanzare
-                if(i==dim-2){
+     for(i=dim-2;i>0;i--)
+	 {// Bombs boss2
+        for(l=0;l<dim;l++)
+		{
+            if(vet[i][l]==15)
+			{// I look for the bullets and make them move forward
+                if(i==dim-2)
+				{
                     vet[i][l]=4;
                     vet[i][l-1]=4;
-                    vet[i][l-2]=4;    //toccano il fondo esplodono
+                    vet[i][l-2]=4;    //Touch the bottom explode
                     vet[i][l+1]=4;
                     vet[i][l+2]=4;
-                    if (sound==1){
-                    Beep(150,50);
+                    if (sound==1)
+					{
+						 Beep(150,50);
                     }
-                }else{
+                }
+				else
+				{
                     vet[i][l]=0;
                     vet[i+1][l]=15;
                 }
             }
         }
     }
-
-
 
 }
 
@@ -1414,7 +1476,7 @@ printf("\n     SPACE INVATERS v0.4                   \n");
                  system("cls");
                  game_level(cate,level);    // Select the level with the function
                  victory=0;
-                 disegna_schermo(cate,score,life,level);      // Design the game screen and look before the start of the game
+                 draws_screen(cate,score,life,level);      // Design the game screen and look before the start of the game
 
                  sleep_mil(1500);
 
@@ -1436,14 +1498,14 @@ printf("\n     SPACE INVATERS v0.4                   \n");
                      }else if(level==7||level==11||level==18||level==22||level==29||level==33){
                          ia_boss2(cate,diff);
                      }else{
-                     artificial_intelligence(cate,diff
+                     artificial_intelligence(cate,diff)
                      }
-                     esplosione(cate);
+                     explosion(cate);
                      score+=attacked(cate,sound); 
 
                      clear_screen();
-                     disegna_schermo(cate,score,life,level);
-                     proiettile(cate,sound);
+                     draws_screen(cate,score,life,level);
+                     bullet(cate,sound);
 
                      victory=Victory_condition(cate);
 
