@@ -1183,7 +1183,8 @@ void draws_screen(int vet[dim][dim],int point,int life,int lv)
     }
 }
 
-void esplosione(int vet[dim][dim])                       // funzione che cancella le esplosioni dal vattore del campo una volta innescate
+void explosion(int vet[dim][dim])                       
+//Function that erases the explosion from the field vector when triggered
 {
     int i,l;
     for(i=0;i<dim;i++){
@@ -1471,7 +1472,7 @@ printf("\n     SPACE INVATERS v0.4                   \n");
                      }else{
                      artificial_intelligence(cate,diff)
                      }
-                     esplosione(cate);
+                     explosion(cate);
                      score+=attacked(cate,sound); 
 
                      clear_screen();
