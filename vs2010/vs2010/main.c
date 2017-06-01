@@ -1,14 +1,14 @@
 ﻿#include <stdio.h>
 #include <stdlib.h>
 #ifdef WIN32
-#include <windows.h>          // mi serve per la funzione di Sleep();
+#include <windows.h>          // need it for Sleep () function;
 #endif
 #ifdef __unix__
 #include <unistd.h>
 #endif // __unix__
 
-#include <conio.h>            // Mi serve per la funzione di getch e ptuch e kbhit(funzione che realizza condizione se premo un tasto)
-#include <time.h>            // srand( time( NULL ) );  num=1 +rand()%n  per numeri casuali
+#include <conio.h>            // getch, ptuch, kbhit을 실행시킬 때에 필요한 기능을 포함(키를 누를 경우 조건을 실현 기능) 
+#include <time.h>            // Srand (time (NULL)); Num = 1 + rand ()% n for random numbers
 
 
 //1. 이탈리아어를 영어로 변경하기 KHJ->LSR
@@ -19,7 +19,7 @@
 void sleep_mil(unsigned int ms)
 {
     #if defined(WIN32)
-      Sleep(ms);
+      Sleep(ms);             // ms = 10^-3, us = 10^-6, ns = 10^-9
     #elif defined(__unix__)
       usleep(1000*ms);
     #else
