@@ -1,14 +1,14 @@
 ﻿#include <stdio.h>
 #include <stdlib.h>
 #ifdef WIN32
-#include <windows.h>          // mi serve per la funzione di Sleep();
+#include <windows.h>          // need it for Sleep () function;
 #endif
 #ifdef __unix__
 #include <unistd.h>
 #endif // __unix__
 
-#include <conio.h>            // Mi serve per la funzione di getch e ptuch e kbhit(funzione che realizza condizione se premo un tasto)
-#include <time.h>            // srand( time( NULL ) );  num=1 +rand()%n  per numeri casuali
+#include <conio.h>            // getch, ptuch, kbhit을 실행시킬 때에 필요한 기능을 포함(키를 누를 경우 조건을 실현 기능) 
+#include <time.h>            // Srand (time (NULL)); Num = 1 + rand ()% n for random numbers
 
 
 //1. 이탈리아어를 영어로 변경하기 KHJ->LSR
@@ -19,7 +19,7 @@
 void sleep_mil(unsigned int ms)
 {
     #if defined(WIN32)
-      Sleep(ms);
+      Sleep(ms);             // ms = 10^-3, us = 10^-6, ns = 10^-9
     #elif defined(__unix__)
       usleep(1000*ms);
     #else
@@ -54,7 +54,7 @@ void clear_screen ( void )
 
 void set_color(short Color)
 {
-  HANDLE hCon = GetStdHandle(STD_OUTPUT_HANDLE); // Funzione che mi permette di cambiare colore del testo;
+  HANDLE hCon = GetStdHandle(STD_OUTPUT_HANDLE); // Function that allows me to change the color of the text
   SetConsoleTextAttribute(hCon,Color);
 }
 
@@ -73,7 +73,7 @@ void boss(int vet[dim][dim],int dif)
                 {
                     vet[i][l]=0;
                     vet[i][l-1]=6;
-                }else if(vet[i+1][l]==1&&l!=dim-2&&num<dif)        // evita i proiettili del giocatore se un numero casuale e' minore di 10
+                }else if(vet[i+1][l]==1&&l!=dim-2&&num<dif)         // Avoid player bullets if a random number is less than 10
                 {
                     vet[i][l]=0;
                     vet[i][l+1]=6;
@@ -82,22 +82,22 @@ void boss(int vet[dim][dim],int dif)
 
                 else{
 
-                num=1+rand()%dif;                           //genero un numero random che provoca diversi comportamneti
+                num=1+rand()%dif;                           // generate a random number that causes different behaviors
 
 
                 if(num==1){
-                    if(vet[i][l-1]==0&&l!=1){              // comportmaneto 1: va a sinistra oppure se non può spara
+                    if(vet[i][l-1]==0&&l!=1){              // Behave 1: go left or if he can not shoot
                         vet[i][l]=0;
                         vet[i][l-1]=6;
                     }else{
                         flag=0;
                     for(k=i+1;k<dim;k++){
-                        if(vet[k][l]==3||vet[k][l]==6){    //controlla se ha la traiettoria di tiro libera, se ha un compagno davanti restituisce 1
+                        if(vet[k][l]==3||vet[k][l]==6){    // Check if he has the free throw trajectory, if he has a front mate returns 1
                             flag=1;
                         }
                     }
                     if(flag==0){
-                            spara=1+rand()%10;            // genera un numero fra 1 e 10 , se è pari lo sparo va a buon fine, altrimenti non spara
+                            spara=1+rand()%10;            // Generates a number between 1 and 10, if it is equal the shot fails, otherwise it does not shoot
                     if(spara%2==0){
                         vet[i+1][l]=5;
                         vet[i][l]=6;
@@ -111,7 +111,7 @@ void boss(int vet[dim][dim],int dif)
                     }
 
                 }
-                if(num==2){                            // comportamento 2: va su, e se non può spara
+                if(num==2){                            // Behavior 2: go on, and if it can not shoot
                     if(vet[i-1][l]==0&&i!=1){
                         vet[i][l]=0;
                         vet[i-1][l]=6;
@@ -139,7 +139,7 @@ void boss(int vet[dim][dim],int dif)
 
                 }
                 if(num==3){
-                    if(vet[i][l+1]==0&&l!=dim-2){         // comportamento 3: va a destra, e se non può spara
+                    if(vet[i][l+1]==0&&l!=dim-2){         // Behavior 3: Go to the right, and if he can not shoot
                         vet[i][l]=0;
                         vet[i][l+1]=6;
                     }else{
@@ -168,7 +168,7 @@ void boss(int vet[dim][dim],int dif)
                 if(num==4){
                     if(vet[i+1][l]==0&&i!=(dim/2)-2){
                         vet[i][l]=0;
-                        vet[i+1][l]=6;                // comportamento 4: va giu, e se non può spara
+                        vet[i+1][l]=6;                // Behavior 4: go down, and if he can not shoot
                     }else{
                         flag=0;
                     for(k=i+1;k<dim;k++){
@@ -194,7 +194,7 @@ void boss(int vet[dim][dim],int dif)
                 if(num==5){
                     flag=0;
                     for(k=i+1;k<dim;k++){
-                        if(vet[k][l]==3||vet[k][l]==6){    // comportamento 5: spara, ovviamente evitando se davanti a se ha un alleato
+                        if(vet[k][l]==3||vet[k][l]==6){    // Behavior 5: Shoot, obviously avoiding if you have an ally in front of you
                             flag=1;
                         }
                     }
@@ -244,13 +244,13 @@ void ia_boss2(int vet[dim][dim],int dif)
                 {
                     vet[i][l]=0;
                     vet[i][l-1]=6;
-                                               // questi due if servono perchè la navicella eviti un proiettile del compagno, se è possibile
+                                              // These two if are used because the ship avoids a bullet bullet if it is possible
 
                 }else if((vet[i-1][l]==5&&vet[i][l+1]==0)||(vet[i-1][l]==15&&vet[i][l+1]==0))
                 {
                     vet[i][l]=0;
                     vet[i][l+1]=6;
-                                              // questi due if servono perchè la navicella eviti un proiettile del compagno, se è possibile
+                                              // These two if they serve because the ship avoids a bullet bullet if it is possible
 
 
                 }else{
@@ -259,7 +259,7 @@ void ia_boss2(int vet[dim][dim],int dif)
                 {
                     vet[i][l]=0;
                     vet[i][l-1]=6;
-                }else if(vet[i+1][l]==1&&l!=dim-2&&num<dif&&vet[i][l+1]==0)        // evita i proiettili del giocatore se un numero casuale e' minore di 10
+                }else if(vet[i+1][l]==1&&l!=dim-2&&num<dif&&vet[i][l+1]==0)       // Avoid player bullets if a random number is less than 10
                 {
                     vet[i][l]=0;
                     vet[i][l+1]=6;
@@ -268,22 +268,22 @@ void ia_boss2(int vet[dim][dim],int dif)
 
                 else{
 
-                num=1+rand()%dif;                           //genero un numero random che provoca diversi comportamneti
+                num=1+rand()%dif;                           // generate a random number that causes different behaviors
 
 
                 if(num==1){
-                    if(vet[i][l-1]==0&&l!=1){              // comportmaneto 1: va a sinistra oppure se non può spara
+                    if(vet[i][l-1]==0&&l!=1){              // Behave 1: go left or if he can not shoot
                         vet[i][l]=0;
                         vet[i][l-1]=6;
                     }else{
                         flag=0;
                     for(k=i+1;k<dim;k++){
-                        if(vet[k][l]==14||vet[k][l]==6){    //controlla se ha la traiettoria di tiro libera, se ha un compagno davanti restituisce 1
+                        if(vet[k][l]==14||vet[k][l]==6){    // check if he has the free throw trajectory, if he has a front companion returns 1
                             flag=1;
                         }
                     }
                     if(flag==0){
-                            spara=1+rand()%10;            // genera un numero fra 1 e 10 , se è pari lo sparo va a buon fine, altrimenti non spara
+                            spara=1+rand()%10;            // Generates a number between 1 and 10, if it is equal the shot fails, otherwise it does not shoot
                     if(spara%2==0){
                         if(vet[i+2][l]==0){
                           vet[i+1][l]=5;
@@ -299,7 +299,7 @@ void ia_boss2(int vet[dim][dim],int dif)
                     }
 
                 }
-                if(num==2){                            // comportamento 2: va su, e se non può spara
+                if(num==2){                            // Behavior 2: Go on, and if it can not shoot
                     if(vet[i-1][l]==0&&i!=1){
                         vet[i][l]=0;
                         vet[i-1][l]=6;
@@ -329,7 +329,7 @@ void ia_boss2(int vet[dim][dim],int dif)
 
                 }
                 if(num==3){
-                    if(vet[i][l+1]==0&&l!=dim-2){         // comportamento 3: va a destra, e se non può spara
+                    if(vet[i][l+1]==0&&l!=dim-2){         // Behavior 3: Go to the right, and if it can not shoot
                         vet[i][l]=0;
                         vet[i][l+1]=6;
                     }else{
@@ -360,7 +360,7 @@ void ia_boss2(int vet[dim][dim],int dif)
                 if(num==4){
                     if(vet[i+1][l]==0&&i!=(dim/2)-2){
                         vet[i][l]=0;
-                        vet[i+1][l]=6;                // comportamento 4: va giu, e se non può spara
+                        vet[i+1][l]=6;                // behavior 4: go down, and if he can not shoot
                     }else{
                         flag=0;
                     for(k=i+1;k<dim;k++){
@@ -388,7 +388,7 @@ void ia_boss2(int vet[dim][dim],int dif)
                 if(num==5){
                     flag=0;
                     for(k=i+1;k<dim;k++){
-                        if(vet[k][l]==14||vet[k][l]==6){    // comportamento 5: spara, ovviamente evitando se davanti a se ha un alleato
+                        if(vet[k][l]==14||vet[k][l]==6){    // Behavior 5: Shoot, obviously avoiding if you have an ally in front of you
                             flag=1;
                         }
                     }
