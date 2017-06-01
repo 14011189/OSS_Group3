@@ -11,7 +11,7 @@
 #include <time.h>            // srand( time( NULL ) );  num=1 +rand()%n  per numeri casuali
 
 
-//1. 이탈리아어를 영어로 변경하기 KHJ
+//1. 이탈리아어를 영어로 변경하기 KHJ->LSR
 
 
 #define dim 18
