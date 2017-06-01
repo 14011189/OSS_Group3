@@ -11,7 +11,7 @@
 #include <time.h>            // Srand (time (NULL)); Num = 1 + rand ()% n for random numbers
 
 
-//1. 이탈리아어를 영어로 변경하기 KHJ->LSR->SDH
+//1. 이탈리아어를 영어로 변경하기 KHJ->LSR->SDH->ASY:완료
 
 
 #define dim 18
