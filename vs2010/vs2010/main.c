@@ -1076,7 +1076,7 @@ void game_level(int vet[dim][dim],int lv)
 
 }
 
-void draws_screen(int vet[dim][dim],int point,int life,int lv)                  
+void disegna_schermo(int vet[dim][dim],int point,int life,int lv)                  
 //Function that draws the playing field from a vector [n] [n]
 {
     int i,l;
@@ -1476,7 +1476,7 @@ printf("\n     SPACE INVATERS v0.4                   \n");
                  system("cls");
                  game_level(cate,level);    // Select the level with the function
                  victory=0;
-                 draws_screen(cate,score,life,level);      // Design the game screen and look before the start of the game
+                 disegna_schermo(cate,score,life,level);      // Design the game screen and look before the start of the game
 
                  sleep_mil(1500);
 
@@ -1498,16 +1498,16 @@ printf("\n     SPACE INVATERS v0.4                   \n");
                      }else if(level==7||level==11||level==18||level==22||level==29||level==33){
                          ia_boss2(cate,diff);
                      }else{
-                     artificial_intelligence(cate,diff)
+                     artificial_intelligence(cate,diff);
                      }
                      explosion(cate);
                      score+=attacked(cate,sound); 
 
                      clear_screen();
-                     draws_screen(cate,score,life,level);
+                     disegna_schermo(cate,score,life,level);
                      bullet(cate,sound);
 
-                     victory=Victory_condition(cate);
+                     victory=victory_condition(cate);
 
 
                      if(victory==1){
