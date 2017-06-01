@@ -54,7 +54,7 @@ void clear_screen ( void )
 
 void set_color(short Color)
 {
-  HANDLE hCon = GetStdHandle(STD_OUTPUT_HANDLE); // Funzione che mi permette di cambiare colore del testo;
+  HANDLE hCon = GetStdHandle(STD_OUTPUT_HANDLE); // Function that allows me to change the color of the text
   SetConsoleTextAttribute(hCon,Color);
 }
 
