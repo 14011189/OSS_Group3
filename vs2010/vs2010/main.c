@@ -822,16 +822,18 @@ int condizione_vittoria(int vet[dim][dim])
 
 }
 
-void mossa_giocatore(int vet[dim][dim],int azione,int sound)                    // Funzione per le azioni che può fare il giocatore, premendo sul tastierino numerico
+//Function for actions that the player can do by pressing on the numeric keypad
+void move_player(int vet[dim][dim],int azione,int sound)                   
 {
 
 
     int i,l;
     switch(azione)
     {
+		//52 ASCII stands for 4, action to go left
     case 52:
         for(i=0;i<dim;i++){
-            for(l=0;l<dim;l++){                                     // 52 asci sta per 4, ovvero azione per andare a sinistra
+            for(l=0;l<dim;l++){                                     
                 if(vet[i][l]==2){
                         if(l>1){
                     vet[i][l]=0;
@@ -842,10 +844,12 @@ void mossa_giocatore(int vet[dim][dim],int azione,int sound)                    
         }
 
         break;
+
+		//54 ASCII stands for 6, action to go right
     case 54:
         for(i=0;i<dim;i++){
             for(l=dim;l>0;l--){
-                if(vet[i][l]==2){                             // 54 asci sta per 6, ovvero azione per andare a destra
+                if(vet[i][l]==2){                             
                         if(l<dim-2){
                     vet[i][l]=0;
                     vet[i][l+1]=2;
@@ -856,9 +860,11 @@ void mossa_giocatore(int vet[dim][dim],int azione,int sound)                    
         }
 
         break;
+
+		//53 ASCII stands for 5, action to shoot
     case 53:
         for(i=0;i<dim;i++){
-            for(l=0;l<dim;l++){                           // 53 asci sta per 5, ovvero azione per sparare
+            for(l=0;l<dim;l++){                           
                 if(vet[i][l]==2){
                     vet[i-1][l]=1;
                     if (sound==1){
@@ -1407,7 +1413,7 @@ printf("\n     SPACE INVATERS v0.4                   \n");
                      condition=_kbhit();                   
                      if(condition==1){      
                          move=_getch();
-                         mossa_giocatore(cate,move,sound);
+                         move_player(cate,move,sound);
                      }
 
 
