@@ -904,88 +904,121 @@ void mossa_giocatore(int vet[dim][dim],int azione,int sound)                    
 
 }
 
-void esplosione(int vet[dim][dim])                       // funzione che cancella le esplosioni dal vattore del campo una volta innescate
+// 폭발하고 그 폭발을 삭제하는 기능
+void explosion(int vet[dim][dim])
 {
-	int i,l;
-	for(i=0;i<dim;i++){
-		for(l=0;l<dim;l++){
-			if(vet[i][l]==4){
-				vet[i][l]=16;
-			}else if(vet[i][l]==16){
-				vet[i][l]=0;
-			}
-		}
-	}
-
-
+    int i,l;
+    for(i=0; i<dim; i++)
+	{
+        for(l=0;l<dim;l++)
+		{
+            if(vet[i][l]==4)
+			{
+                vet[i][l]=16;
+            }
+			else if(vet[i][l]==16)
+			{
+                vet[i][l]=0;
+            }
+        }
+    }
 }
 
-void proiettile(int vet[dim][dim],int sound)           // funzione che calcola i movimenti dei proiettili saprati sia dal giocatore che dal nemico
+//총알의 움직임을 계산하는 기능 
+void bullet(int vet[dim][dim],int sound)     
 {
-	int i,l;
-	for(i=0;i<dim;i++){
-		for(l=0;l<dim;l++){
-			if(vet[i][l]==1){
-				if(i==1){               // cerco i proiettili del giocatore e li faccio avanzare
-					vet[i][l]=0;
-				}else {
-					vet[i][l]=0;
-					vet[i-1][l]=1;
-				}
-			}
-		}
-	}
-	for(i=dim-2;i>0;i--){
-		for(l=0;l<dim;l++){
-			if(vet[i][l]==5){         // cerco i proiettili nemici e li faccio avanzare
-				if(i==dim-2){
-					vet[i][l]=0;
-				}else{
-					vet[i][l]=0;
-					vet[i+1][l]=5;
-				}
-			}
-		}
-	}
-	for(i=dim-2;i>0;i--){                // bombe bombardieri
-		for(l=0;l<dim;l++){
-			if(vet[i][l]==8){         // cerco i proiettili nemici e li faccio avanzare
-				if(i==dim-2){
-					vet[i][l]=4;
-					vet[i][l-1]=4;        //toccano il fondo esplodono
-					vet[i][l+1]=4;
-					if (sound==1){
-						//Beep(150,50);
-					}
-				}else{
-					vet[i][l]=0;
-					vet[i+1][l]=8;
-				}
-			}
-		}
-	}
-	for(i=dim-2;i>0;i--){                // bombe boss2
-		for(l=0;l<dim;l++){
-			if(vet[i][l]==15){         // cerco i proiettili e li faccio avanzare
-				if(i==dim-2){
-					vet[i][l]=4;
-					vet[i][l-1]=4;
-					vet[i][l-2]=4;    //toccano il fondo esplodono
-					vet[i][l+1]=4;
-					vet[i][l+2]=4;
-					if (sound==1){
-						//Beep(150,50);
-					}
-				}else{
-					vet[i][l]=0;
-					vet[i+1][l]=15;
-				}
-			}
-		}
-	}
+    int i,l;
+    for(i=0;i<dim;i++)
+	{
+        for(l=0; l<dim; l++)
+		{
+            if(vet[i][l]==1)
+			{
+                    if(i==1)
+					{// player 총알 발사 함수               
+                        vet[i][l]=0;
+                    }
+					else 
+					{
+                      vet[i][l]=0;
+                      vet[i-1][l]=1;
+                    }
+            }
+        }
+    }
+    
+    for(i=dim-2;i>0;i--)
+	{
+        for(l=0;l<dim;l++)
+		{
+            if(vet[i][l]==5)
+			{    // player 총알 발사 궤적 함수
+                if(i==dim-2)
+				{
+                    vet[i][l]=0;
+                }
+				else
+				{
+                    vet[i][l]=0;
+                    vet[i+1][l]=5;
+                }
+            }
+        }
+    }
+    
+    for(i=dim-2;i>0;i--)
+	{               
+        for(l=0;l<dim;l++)
+		{
+            if(vet[i][l]==8)
+			{         
+                if(i==dim-2)
+				{
+                    vet[i][l]=4;
+                    vet[i][l-1]=4;      
+                    vet[i][l+1]=4;
+                    if (sound==1)
+					{
+                    Beep(150,50);
+                    }
+                }
+				else
+				{
+                    vet[i][l]=0;
+                    vet[i+1][l]=8;
+                }
+            }
+        }
+    }
 
-
-
+	// 보스 2 폭탄
+     for(i=dim-2;i>0;i--)
+	 {                
+        for(l=0;l<dim;l++)
+		{
+            if(vet[i][l]==15)
+			{         
+				// boss 2 총알 궤적 함수
+                if(i==dim-2)
+				{
+                    vet[i][l]=4;
+                    vet[i][l-1]=4;
+                    vet[i][l-2]=4;    //총알이 닿았을 때 효과
+                    vet[i][l+1]=4;
+                    vet[i][l+2]=4;
+                    if (sound==1)
+					{
+					 Beep(150,50);
+                    }
+                }
+				else
+				{
+                    vet[i][l]=0;
+                    vet[i+1][l]=15;
+                }
+            }
+        }
+    }
 }
 
 int colpito(int vet[dim][dim],int sound)          // funzione che controlla se un nemico o il giocatore è stato colpito, e nel caso cambia il suo valore con quello dell'esplosione
