@@ -109,13 +109,12 @@ void boss(int vet[dim][dim],int dif)
                     }
                     }
                     }
-
-
                 }
+				// 행동 4: 발사되지 않은 경우, 아래로 이동
                 if(num==4){
                     if(vet[i+1][l]==0&&i!=(dim/2)-2){
                         vet[i][l]=0;
-                        vet[i+1][l]=6;                // 행동 4: 발사되지 않은 경우, 아래로 이동
+                        vet[i+1][l]=6;                
                     }else{
                         flag=0;
                     for(k=i+1;k<dim;k++){
