@@ -80,7 +80,7 @@
     <ClCompile Include="screen.c" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\Desktop\oss pro\oss pro\oss pro\condition.h" />
+    <ClInclude Include="condition.h" />
     <ClInclude Include="object.h" />
     <ClInclude Include="screen.h" />
   </ItemGroup>
