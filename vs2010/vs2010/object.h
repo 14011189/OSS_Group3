@@ -4,12 +4,12 @@ void boss(int vet[dim][dim],int dif);
 
 void ia_boss2(int vet[dim][dim],int dif);
 
-void intelligenza_artificiale(int vet[dim][dim],int dif);
+void artificial_intelligence(int vet[dim][dim],int dif);
 
-void mossa_giocatore(int vet[dim][dim],int azione,int sound);
+void move_player(int vet[dim][dim],int azione,int sound);
 
-void esplosione(int vet[dim][dim]);
+void explosion(int vet[dim][dim]);
 
-void proiettile(int vet[dim][dim],int sound);
+void bullet(int vet[dim][dim],int sound);
 
-int colpito(int vet[dim][dim],int sound);
+int attacked(int vet[dim][dim],int sound);

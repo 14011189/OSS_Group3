@@ -76,9 +76,13 @@
   <ItemGroup>
     <ClCompile Include="..\..\..\Desktop\oss pro\oss pro\oss pro\condition.c" />
     <ClCompile Include="main.c" />
+    <ClCompile Include="object.c" />
+    <ClCompile Include="screen.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Desktop\oss pro\oss pro\oss pro\condition.h" />
+    <ClInclude Include="object.h" />
+    <ClInclude Include="screen.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
