@@ -12,51 +12,12 @@
 
 
 //1. 이탈리아어를 영어로 변경하기 KHJ->LSR->SDH->ASY:완료
-
+//2. 함수 분리 하기 & Comment 달기
 
 #define dim 18
 
-void sleep_mil(unsigned int ms)
-{
-    #if defined(WIN32)
-      Sleep(ms);             // ms = 10^-3, us = 10^-6, ns = 10^-9
-    #elif defined(__unix__)
-      usleep(1000*ms);
-    #else
-      printf("Unsupported operating system!");
-    #endif
-
-}
-
-void clear_screen ( void )
-{
-  DWORD n;                         /* Number of characters written */
-  DWORD size;                      /* number of visible characters */
-  COORD coord = {0};               /* Top left screen position */
-  CONSOLE_SCREEN_BUFFER_INFO csbi;
-
-  /* Get a handle to the console */
-  HANDLE h = GetStdHandle ( STD_OUTPUT_HANDLE );
-
-  GetConsoleScreenBufferInfo ( h, &csbi );
-
-  /* Find the number of characters to overwrite */
-  size = csbi.dwSize.X * csbi.dwSize.Y;
-
-  /* Overwrite the screen buffer with whitespace */
-  FillConsoleOutputCharacter ( h, TEXT ( ' ' ), size, coord, &n );
-  GetConsoleScreenBufferInfo ( h, &csbi );
-  FillConsoleOutputAttribute ( h, csbi.wAttributes, size, coord, &n );
-
-  /* Reset the cursor to the top left position */
-  SetConsoleCursorPosition ( h, coord );
-}
-
-void set_color(short Color)
-{
-  HANDLE hCon = GetStdHandle(STD_OUTPUT_HANDLE); // Function that allows me to change the color of the text
-  SetConsoleTextAttribute(hCon,Color);
-}
+#include "condition.h"
+#include "screen.h"
 
 void boss(int vet[dim][dim],int dif)
 {
@@ -856,112 +817,6 @@ void move_player(int vet[dim][dim],int azione,int sound)
 
 }
 
-void disegna_schermo(int vet[dim][dim],int point,int life,int lv)                  
-//Function that draws the playing field from a vector [n] [n]
-{
-    int i,l;
-
-    printf(" life: %d       (%d)     score: %d",life,lv,point);
-
-    for(i=0;i<dim;i++){
-            printf("\n");
-        for(l=0;l<dim;l++){
-
-            if(i==0)
-			{
-                printf(" -");                            
-				//According to which values in the vector knows whether to draw the player, 
-				//the enemies or other graphic aspects
-            }
-			else if(i==dim-1)
-			{
-                printf(" -");
-            }
-			else if(l==0)
-			{
-                printf(" | ");
-            }
-			else if(l==dim-1)
-			{
-                printf(" | ");
-            }
-            else if(vet[i][l]==0)
-			{
-                printf("  ");
-            }
-			else if(vet[i][l]==1)
-			{
-                printf(" |");
-            }
-			else if(vet[i][l]==2)
-			{
-                set_color(11);
-                printf(" A");
-                set_color(15);
-            }
-			else if(vet[i][l]==3)
-			{
-                set_color(14);
-                printf(" W");
-                set_color(15);
-            }
-			else if(vet[i][l]==4)
-			{
-                set_color(12);
-                printf(" @");
-                set_color(15);
-            }
-			else if(vet[i][l]==5)
-			{
-                set_color(6);
-                printf(" U");
-                set_color(15);
-            }
-			else if(vet[i][l]==7)
-			{
-                set_color(2);
-                printf(" V");
-                set_color(15);
-            }
-			else if(vet[i][l]==8)
-			{
-                set_color(10);
-                printf(" o");
-                set_color(15);
-            }
-			else if(vet[i][l]==10)
-			{
-                set_color(3);
-                printf(" Y");
-                set_color(15);
-            }
-			else if(vet[i][l]==12)
-			{
-                set_color(4);
-                printf(" W");
-                set_color(15);
-            }
-			else if(vet[i][l]==14)
-			{
-                set_color(5);
-                printf(" X");
-                set_color(15);
-            }
-			else if(vet[i][l]==15)
-			{
-                set_color(14);
-                printf(" *");
-                set_color(15);
-            }
-			else if(vet[i][l]==16)
-			{
-                set_color(12);
-                printf(" @");
-                set_color(15);
-            }
-        }
-    }
-}
 
 void explosion(int vet[dim][dim])                       
 //Function that erases the explosion from the field vector when triggered
