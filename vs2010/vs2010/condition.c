@@ -1,7 +1,7 @@
 ﻿#include "condition.h"
 
 //플레이어의 승리 또는 패배 상태를 확인하는 기능
-int victory_condition(int vet[dim][dim])  // 승리 조건
+int victory_condition(int vet[dim][dim]) 
 {
     int i,l,flag=0,player=0;                         //변수 초기화
                                                    
