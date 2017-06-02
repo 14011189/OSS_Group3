@@ -720,16 +720,19 @@ void intelligenza_artificiale(int vet[dim][dim],int dif)         // Funzione che
 
 }
 
-void mossa_giocatore(int vet[dim][dim],int azione,int sound)                    // Funzione per le azioni che può fare il giocatore, premendo sul tastierino numerico
+//주인공 객체에 대한 키보드 조작 함수
+void move_player(int vet[dim][dim],int azione,int sound)
 {
 
 
     int i,l;
+	//azione->입력받은 키보드의 아스키코드 값
     switch(azione)
     {
+	//아스키코드가 52인 왼쪽 방향키를 누르면 주인공 객체 왼쪽이동
     case 52:
         for(i=0;i<dim;i++){
-            for(l=0;l<dim;l++){                                     // 52 asci sta per 4, ovvero azione per andare a sinistra
+            for(l=0;l<dim;l++){                                     
                 if(vet[i][l]==2){
                         if(l>1){
                     vet[i][l]=0;
@@ -740,10 +743,11 @@ void mossa_giocatore(int vet[dim][dim],int azione,int sound)                    
         }
 
         break;
+	//아스키코드가 54인 오른쪽 방향키를 누르면 주인공 객체 오른쪽이동
     case 54:
         for(i=0;i<dim;i++){
             for(l=dim;l>0;l--){
-                if(vet[i][l]==2){                             // 54 asci sta per 6, ovvero azione per andare a destra
+                if(vet[i][l]==2){                             
                         if(l<dim-2){
                     vet[i][l]=0;
                     vet[i][l+1]=2;
@@ -754,13 +758,13 @@ void mossa_giocatore(int vet[dim][dim],int azione,int sound)                    
         }
 
         break;
+	//아스키코드가 53인 스페이스바를 누르면 주인공 객체 총알 발사
     case 53:
         for(i=0;i<dim;i++){
-            for(l=0;l<dim;l++){                           // 53 asci sta per 5, ovvero azione per sparare
+            for(l=0;l<dim;l++){                           
                 if(vet[i][l]==2){
                     vet[i-1][l]=1;
                     if (sound==1){
-                    //Beep(950,25);
                     }
 
                 }
@@ -770,7 +774,6 @@ void mossa_giocatore(int vet[dim][dim],int azione,int sound)                    
         break;
     default:
          if (sound==1){
-        //Beep(300,25);
         }
 
     }
@@ -863,93 +866,106 @@ void proiettile(int vet[dim][dim],int sound)           // funzione che calcola i
 
 }
 
-int colpito(int vet[dim][dim],int sound)          // funzione che controlla se un nemico o il giocatore è stato colpito, e nel caso cambia il suo valore con quello dell'esplosione
+int attcked(int vet[dim][dim],int sound)
 {
-    int i,l,punt=0;                   // variabili fra cui quella del punteggio
+	/* 적 or 플레이어가 타격을 입었는지 여부 검사 */
 
-    for(i=0;i<dim;i++){
+    int i,l,point=0;     // 점수를 포함한 변수들 지정
+
+    // Enemy
+    for(i=0;i<dim;i++){     // (dim=무(無))
         for(l=0;l<dim;l++){
             if((vet[i][l]==3&&vet[i+1][l]==1)||(vet[i][l]==12&&vet[i+1][l]==1)){
+            /* 적이 타격을 입었는지 여부를 확인
+            타격 입었을 경우, 폭발효과와 함께 소리가 나고 점수를 획득 */
                 if(vet[i][l]==12){
                     vet[i][l]=3;
                     vet[i+1][l]=0;
-                    punt+=2;
-                     if (sound==1){
-                    //Beep(150,25);
-                }
+                    point+=2;
+                    if (sound==1){
+                        Beep(150,25);     // (beep=삑 하는 소리)
+                    }
                 }else{
-
-                vet[i][l]=4;                       // controlla se il nemico è stato colpito, se si lo trasforma in esplosione e fa //Beep e aggiunge punteggio
-                vet[i+1][l]=0;
-                punt+=2;
-                if (sound==1){
-                //Beep(250,50);
+                    vet[i][l]=4;
+                    vet[i+1][l]=0;
+                    point+=2;
+                    if (sound==1){
+                        Beep(250,50);
+                    }
                 }
-                }
-
             }else if(vet[i][l]==7&&vet[i+1][l]==1){
-                vet[i][l]=4;                       // controlla se il nemico bombardiere è stato colpito, se si lo trasforma in esplosione e fa //Beep
-                vet[i+1][l]=0;
-                punt+=3;
-                if (sound==1){
-                //Beep(250,50);
-                }
-        }else if((vet[i][l]==10&&vet[i+1][l]==1)||(vet[i][l]==14&&vet[i+1][l]==1)){
-                vet[i][l]=4;                       // controlla se il boss è stato colpito
-                vet[i+1][l]=0;
-                punt+=25;
-                if (sound==1){
-                //Beep(250,50);
-                }
-        }
-    }
-    }
-
-    for(i=dim-2;i>0;i--){
-        for(l=0;l<dim;l++){
-            if(vet[i][l]==2&&vet[i-1][l]==5){       // controlla se è stato colpito il giocatore
+            /* 적 중에서도 폭격기가 타격을 입었는지 여부를 확인
+	        타격 입었을 경우, 폭발효과와 함께 소리가 남 */
                 vet[i][l]=4;
-                vet[i-1][l]=0;
+                vet[i+1][l]=0;
+                point+=3;
                 if (sound==1){
-                //Beep(250,50);
+                    Beep(250,50);
+                }
+            }else if((vet[i][l]==10&&vet[i+1][l]==1)||(vet[i][l]==14&&vet[i+1][l]==1)){
+            /* 보스가 타격을 입었는지 여부 확인
+            타격 입었을 경우, 폭발효과와 함께 소리가 나며 큰 점수 획득 */
+                vet[i][l]=4;
+                vet[i+1][l]=0;
+                point+=25;
+                if (sound==1){
+                    Beep(250,50);
                 }
             }
-             if(vet[i][l]==2&&vet[i-1][l]==8){       // controlla se è stato colpito il giocatore dalle bombe
-                vet[i][l]=4;
-                vet[i-1][l]=0;
-                if (sound==1){
-                //Beep(250,50);
-                }
-                }
-            if(vet[i][l]==2&&vet[i-1][l-1]==8){       // controlla se è stato colpito il giocatore dalle bombe
-                vet[i][l]=4;
-                vet[i-1][l]=0;
-                vet[i][l-1]=4;
-                vet[i][l+1]=4;
-                if (sound==1){
-                //Beep(250,50);
-                }
-                }
-            if(vet[i][l]==2&&vet[i-1][l+1]==8){       // controlla se è stato colpito il giocatore dalle bombe
-                vet[i][l]=4;
-                vet[i-1][l]=0;
-                vet[i][l-1]=4;
-                vet[i][l+1]=4;
-                if (sound==1){
-                //Beep(250,50);
-                }
-                }
-            if(vet[i][l]==2&&vet[i-1][l]==15){       // controlla se è stato colpito il giocatore dalle bombe del boss
-                vet[i][l]=4;
-                vet[i-1][l]=0;
-                if (sound==1){
-                //Beep(250,50);
-                }
-                }
         }
     }
 
-    return punt;
-
-
+    //Player
+    for(i=dim-2;i>0;i--){
+        for(l=0;l<dim;l++){
+            if(vet[i][l]==2&&vet[i-1][l]==5){
+            /* 플레이어가 타격을 입었는지 여부 확인
+            위의 적이 타격입은 경우와의 차이점은 점수 변화가 없고 vet[i+1][l]=0이 아닌 vet[i-1][l]=0 */
+                vet[i][l]=4;
+                vet[i-1][l]=0;
+                if (sound==1){
+                    Beep(250,50);
+                }
+            }
+            if(vet[i][l]==2&&vet[i-1][l]==8){
+            /* 플레이어가 폭탄에 의해 타격을 입었는지 여부 확인 */
+                vet[i][l]=4;
+                vet[i-1][l]=0;
+                if (sound==1){
+                    Beep(250,50);
+                }
+            }
+            if(vet[i][l]==2&&vet[i-1][l-1]==8){
+            /* 플레이어가 폭탄에 의해 타격을 입었는지 여부 확인
+            위의 경우와 차이점은 vet[i][l-1]=4, vet[i][l+1]=4 이 추가됨*/
+                vet[i][l]=4;
+                vet[i-1][l]=0;
+                vet[i][l-1]=4;
+                vet[i][l+1]=4;
+                if (sound==1){
+                    Beep(250,50);
+                }
+            }
+            if(vet[i][l]==2&&vet[i-1][l+1]==8){
+            /* 플레이어가 폭탄에 의해 타격을 입었는지 여부 확인
+            위와 변화 동일 -> 연산자 || 를 이용해 합쳐서 개선 가능 */
+                vet[i][l]=4;
+                vet[i-1][l]=0;
+                vet[i][l-1]=4;
+                vet[i][l+1]=4;
+                if (sound==1){
+                    Beep(250,50);
+                }
+            }
+            if(vet[i][l]==2&&vet[i-1][l]==15){
+            /* 보스로부터 타격 입었는지 여부 확인 */
+                vet[i][l]=4;
+                vet[i-1][l]=0;
+                if (sound==1){
+                    Beep(250,50);
+                }
+            }
+        }
+    }
+    return point;
 }
