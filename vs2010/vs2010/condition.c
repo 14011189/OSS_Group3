@@ -1,35 +1,42 @@
 ﻿#include "condition.h"
 
-int victory_condition(int vet[dim][dim])            
-// Function to verify the player's win or defeat condition
+//플레이어의 승리 또는 패배 상태를 확인하는 기능
+int victory_condition(int vet[dim][dim])  // 승리 조건
 {
-    int i,l,flag=0,giocatore=0;                         // Variable initialization
-
+    int i,l,flag=0,player=0;                         //변수 초기화
+                                                   
     for(i=0;i<dim;i++){
         for(l=0;l<dim;l++){
-            if(vet[i][l]==3||vet[i][l]==7||vet[i][l]==10||vet[i][l]==12||vet[i][l]==14){                          
-  // I seek the presence of both the player and the enemy on the playing field
-                flag=1; 					// There is a flag if I find an enemy
-
-            }if(vet[i][l]==2){
-                giocatore=1; 				// Another flag if I find the player
+			// 필드에서 player와 적  존재를 찾음.
+            if(vet[i][l]==3||vet[i][l]==7||vet[i][l]==10||vet[i][l]==12||vet[i][l]==14)
+			{  //적을 발견했을 때
+                flag=1; 			
+            }
+			if(vet[i][l]==2)
+			{//플레이어를 찾았을 때의 player
+                player=1; 	
             }
         }
     }
-
-    if(flag==1&&giocatore==1)
+   //필드에서 발견 된 값에 따라 다른 값을 반환 
+   if(flag==1&&giocatore==1) // 적이 있고, 플레이어가 있는 경우
     {
-        return 0;
-    }else if(flag==0&&giocatore==1){                 
-// According to who was found on the field, the function returns different values
-        return 1;
-    }else if(flag==1&&giocatore==0){
-        return 2;
-    }else{
-        return 3;
+			 return 0;
     }
-
+	else if(flag==0&&giocatore==1)
+	{   // 적이 없고 플레이어가 있는 경우              
+			return 1;
+    }
+	else if(flag==1&&giocatore==0) // 적이 있고 플레이어가 없는 경우
+	{
+			return 2;
+	}
+	else  //적이 없고 플레이어가 없는 경우
+	{
+			return 3;
+	}
 }
+
 
 void game_level(int vet[dim][dim],int lv)
 {
