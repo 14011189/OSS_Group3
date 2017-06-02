@@ -722,16 +722,19 @@ void intelligenza_artificiale(int vet[dim][dim],int dif)         // Funzione che
 
 }
 
-void mossa_giocatore(int vet[dim][dim],int azione,int sound)                    // Funzione per le azioni che può fare il giocatore, premendo sul tastierino numerico
+//주인공 객체에 대한 키보드 조작 함수
+void move_player(int vet[dim][dim],int azione,int sound)
 {
 
 
     int i,l;
+	//azione->입력받은 키보드의 아스키코드 값
     switch(azione)
     {
+	//아스키코드가 52인 왼쪽 방향키를 누르면 주인공 객체 왼쪽이동
     case 52:
         for(i=0;i<dim;i++){
-            for(l=0;l<dim;l++){                                     // 52 asci sta per 4, ovvero azione per andare a sinistra
+            for(l=0;l<dim;l++){                                     
                 if(vet[i][l]==2){
                         if(l>1){
                     vet[i][l]=0;
@@ -742,10 +745,11 @@ void mossa_giocatore(int vet[dim][dim],int azione,int sound)                    
         }
 
         break;
+	//아스키코드가 54인 오른쪽 방향키를 누르면 주인공 객체 오른쪽이동
     case 54:
         for(i=0;i<dim;i++){
             for(l=dim;l>0;l--){
-                if(vet[i][l]==2){                             // 54 asci sta per 6, ovvero azione per andare a destra
+                if(vet[i][l]==2){                             
                         if(l<dim-2){
                     vet[i][l]=0;
                     vet[i][l+1]=2;
@@ -756,13 +760,13 @@ void mossa_giocatore(int vet[dim][dim],int azione,int sound)                    
         }
 
         break;
+	//아스키코드가 53인 스페이스바를 누르면 주인공 객체 총알 발사
     case 53:
         for(i=0;i<dim;i++){
-            for(l=0;l<dim;l++){                           // 53 asci sta per 5, ovvero azione per sparare
+            for(l=0;l<dim;l++){                           
                 if(vet[i][l]==2){
                     vet[i-1][l]=1;
                     if (sound==1){
-                    //Beep(950,25);
                     }
 
                 }
@@ -772,7 +776,6 @@ void mossa_giocatore(int vet[dim][dim],int azione,int sound)                    
         break;
     default:
          if (sound==1){
-        //Beep(300,25);
         }
 
     }
