@@ -31,11 +31,12 @@ int victory_condition(int vet[dim][dim])
 
 }
 
-void game_level(int vet[dim][dim],int lv)
+//레벨별 화면구성 배열 vet[][] 값 설정
+void game_level(int vet[dim][dim],int lv)	
 {
     int i,l;
 
-	// Empty the field
+	//vet[][] 필드 초기화
     for(i=0;i<dim;i++){
         for(l=0;l<dim;l++){               
             vet[i][l]=0;
@@ -48,7 +49,7 @@ void game_level(int vet[dim][dim],int lv)
     vet[dim-2][(dim/2)-1]=2;
     vet[3][10]=3;
 
-	//Insert enemies by algorithm
+	//알고리즘에 따라 적객체 입력
      for(i=1;i<2;i++){
         for(l=1;l<dim-1;l++){          
             vet[i][l]=3;
@@ -60,7 +61,7 @@ void game_level(int vet[dim][dim],int lv)
     case 2:
     vet[dim-2][(dim/2)-1]=2;
 
-	//Insert enemies by algorithm
+	//알고리즘에 따라 적객체 입력
      for(i=1;i<3;i++){
         if(i==1){
          for(l=1;l<dim-1;l++){          
@@ -69,7 +70,7 @@ void game_level(int vet[dim][dim],int lv)
         }
         }
 
-		//Insert enemies by algorithm
+		//알고리즘에 따라 적객체 입력
         if(i==2){
             for(l=2;l<dim-1;l++){         
             vet[i][l]=3;
@@ -82,7 +83,7 @@ void game_level(int vet[dim][dim],int lv)
     vet[dim-2][(dim/2)-1]=2;
     vet[3][10]=7;
 
-	//Insert enemies by algorithm
+	//알고리즘에 따라 적객체 입력
      for(i=1;i<2;i++){
         for(l=1;l<dim-1;l++){          
             vet[i][l]=7;
@@ -101,7 +102,7 @@ void game_level(int vet[dim][dim],int lv)
         vet[dim-2][(dim/2)-1]=2;
         vet[3][10]=12;
 
-		//Insert enemies by algorithm
+		//알고리즘에 따라 적객체 입력
        for(i=1;i<2;i++){
           for(l=1;l<dim-1;l++){          
               vet[i][l]=12;
@@ -113,7 +114,7 @@ void game_level(int vet[dim][dim],int lv)
     case 6:
          vet[dim-2][(dim/2)-1]=2;
 
-	//Insert enemies by algorithm
+	 //알고리즘에 따라 적객체 입력
      for(i=1;i<3;i++){
         if(i==1){
          for(l=1;l<dim-1;l++){          
@@ -121,7 +122,7 @@ void game_level(int vet[dim][dim],int lv)
             l++;
         }
         }
-	//Insert enemies by algorithm
+	//알고리즘에 따라 적객체 입력
         if(i==2){
             for(l=2;l<dim-1;l++){       
             vet[i][l]=12;
@@ -139,21 +140,21 @@ void game_level(int vet[dim][dim],int lv)
         vet[dim-2][(dim/2)-1]=2;
          for(i=1;i<4;i++){
         if(i==1){
-		//Insert enemies by algorithm
+		//알고리즘에 따라 적객체 입력
          for(l=1;l<dim-1;l++){          
             vet[i][l]=3;
             l++;
         }
         }
         if(i==2){
-			//Insert enemies by algorithm
+			//알고리즘에 따라 적객체 입력
             for(l=2;l<dim-1;l++){        
             vet[i][l]=3;
             l++;
         }
         }
         if(i==3){
-			//Insert enemies by algorithm
+			//알고리즘에 따라 적객체 입력
             for(l=1;l<dim-1;l++){         
             vet[i][l]=3;
             l++;
@@ -165,21 +166,21 @@ void game_level(int vet[dim][dim],int lv)
         vet[dim-2][(dim/2)-1]=2;
          for(i=1;i<4;i++){
         if(i==1){
-		//Insert enemies by algorithm
+		//알고리즘에 따라 적객체 입력
          for(l=1;l<dim-1;l++){         
             vet[i][l]=12;
             l++;
         }
         }
         if(i==2){
-			//Insert enemies by algorithm
+		//알고리즘에 따라 적객체 입력
             for(l=2;l<dim-1;l++){         
             vet[i][l]=12;
             l++;
         }
         }
         if(i==3){
-			//Insert enemies by algorithm
+		//알고리즘에 따라 적객체 입력
             for(l=1;l<dim-1;l++){         
             vet[i][l]=12;
             l++;
@@ -192,14 +193,14 @@ void game_level(int vet[dim][dim],int lv)
 
      for(i=1;i<3;i++){
         if(i==1){
-		//Insert enemies by algorithm
+		//알고리즘에 따라 적객체 입력
          for(l=1;l<dim-1;l++){          
             vet[i][l]=7;
             l++;
         }
         }
         if(i==2){
-			//Insert enemies by algorithm
+		//알고리즘에 따라 적객체 입력
             for(l=2;l<dim-1;l++){          
             vet[i][l]=7;
             l++;
