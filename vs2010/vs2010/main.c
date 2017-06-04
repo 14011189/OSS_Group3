@@ -30,6 +30,8 @@ int main()    // The main function of the game
     char name[dim];
     FILE *fp;
 
+	RemoveCursor();
+
     fp=fopen("dati.dat","r");    // Opening and reading the settings file
     if(fp==NULL){
         printf("\nERROR OPENING FILE!");
