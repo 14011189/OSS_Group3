@@ -867,7 +867,7 @@ void move_player(int vet[dim][dim],int azione,int sound)
 	//azione->입력받은 키보드의 아스키코드 값
 	switch(azione)
 	{
-		//아스키코드가 52인 왼쪽 방향키를 누르면 주인공 객체 왼쪽이동
+		//아스키코드가 52인 4번을 누르면 주인공 객체 왼쪽이동
 	case 52:
 		for(i=0;i<dim;i++){
 			for(l=0;l<dim;l++){                                     
@@ -881,7 +881,7 @@ void move_player(int vet[dim][dim],int azione,int sound)
 		}
 
 		break;
-		//아스키코드가 54인 오른쪽 방향키를 누르면 주인공 객체 오른쪽이동
+		//아스키코드가 54인 6번을 누르면 주인공 객체 오른쪽이동
 	case 54:
 		for(i=0;i<dim;i++){
 			for(l=dim;l>0;l--){
@@ -896,7 +896,7 @@ void move_player(int vet[dim][dim],int azione,int sound)
 		}
 
 		break;
-		//아스키코드가 53인 스페이스바를 누르면 주인공 객체 총알 발사
+		//아스키코드가 53인 5번을 누르면 주인공 객체 총알 발사
 	case 53:
 		for(i=0;i<dim;i++){
 			for(l=0;l<dim;l++){                           
