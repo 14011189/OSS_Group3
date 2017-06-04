@@ -924,8 +924,8 @@ int i,l;
 	//azione->입력받은 키보드의 아스키코드 값
 	switch(azione)
 	{
-		//아스키코드가 54인 '6'를 누르면 주인공 객체 오른쪽
-	case 54:
+		//아스키코드가 77인 '->'를 누르면 주인공 객체 왼쪽이동
+	case 77:
 		for(i=0;i<dim;i++){
 			for(l=0;l<dim;l++){                                     
 				if(vet[i][l]==2){
@@ -938,8 +938,8 @@ int i,l;
 		}
 
 		break;
-		//아스키코드가 54인 오른쪽 방향키를 누르면 주인공 객체 오른쪽이동
-	case 52:
+		//아스키코드가 75인 '<-'를 누르면 주인공 객체 오른쪽이동
+	case 75:
 		for(i=0;i<dim;i++){
 			for(l=dim;l>0;l--){
 				if(vet[i][l]==2){                             
@@ -974,6 +974,7 @@ int i,l;
 	}
 
 }
+
 // 폭발하고 그 폭발을 삭제하는 기능
 void explosion(int vet[dim][dim])
 {
