@@ -19,15 +19,15 @@ int victory_condition(int vet[dim][dim])
         }
     }
    //필드에서 발견 된 값에 따라 다른 값을 반환 
-   if(flag==1&&giocatore==1) // 적이 있고, 플레이어가 있는 경우
+   if(flag==1&&player==1) // 적이 있고, 플레이어가 있는 경우
     {
 			 return 0;
     }
-	else if(flag==0&&giocatore==1)
+	else if(flag==0&&player==1)
 	{   // 적이 없고 플레이어가 있는 경우              
 			return 1;
     }
-	else if(flag==1&&giocatore==0) // 적이 있고 플레이어가 없는 경우
+	else if(flag==1&&player==0) // 적이 있고 플레이어가 없는 경우
 	{
 			return 2;
 	}
