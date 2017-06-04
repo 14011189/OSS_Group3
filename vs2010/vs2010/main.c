@@ -216,9 +216,9 @@ int main()
                 system("cls");
                 printf("\n Game controls:                             ");     // 게임 설명
                 printf("\n Use the numeric keypad to play             ");     // 게임을 위해서 숫자키를 사용
-                printf("\n 4: To go left                              ");     // 4 : 좌로 이동
-                printf("\n 6: To go right                             ");     // 6 : 우로 이동
-                printf("\n 5: To shoot                             \n ");     // 5 : 총알 발사
+                printf("\n ←: To go left                              ");     // ← : 좌로 이동
+                printf("\n →: To go right                             ");     // → : 우로 이동
+                printf("\n Space bar: To shoot                      \n ");     // 스페이스바 : 총알 발사
                 printf("\n Lower the enemy spaceships to win, to the initial 3 lives.\n");    // 3개의 생명이 있으며, 적 비행선이 적을수록 게임에서 승리
                 printf("\n Press a key to go back                   : ");     // 뒤로 가기
                 fflush(stdin);
