@@ -33,7 +33,7 @@ int main()
     char name[dim];
     FILE *fp;
 
-//	RemoveCursor();
+	RemoveCursor();
 
     /* Setting 파일 열고 읽기
     읽고 여는 것이 오류 날 경우 sleep_mill=3000 */
@@ -122,7 +122,14 @@ int main()
                         condition=_kbhit();
                         if(condition==1){
                             move=_getch();
-                            move_player(cate,move,sound);
+							if(level%2==0)
+							{
+								item_move(cate,move,sound);
+							}
+							else
+							{
+								move_player(cate,move,sound);
+							}
                         }
 
                         /* 특정 레벨에 도달 할 경우 보스 등장 */

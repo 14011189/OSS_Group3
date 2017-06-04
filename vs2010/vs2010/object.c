@@ -918,6 +918,63 @@ void move_player(int vet[dim][dim],int azione,int sound)
 
 }
 
+void item_move(int vet[dim][dim],int azione,int sound)
+{
+int i,l;
+	//azione->입력받은 키보드의 아스키코드 값
+	switch(azione)
+	{
+		//아스키코드가 77인 '->'를 누르면 주인공 객체 왼쪽이동
+	case 77:
+		for(i=0;i<dim;i++){
+			for(l=0;l<dim;l++){                                     
+				if(vet[i][l]==2){
+					if(l>1){
+						vet[i][l]=0;
+						vet[i][l-1]=2;
+					}
+				}
+			}
+		}
+
+		break;
+		//아스키코드가 75인 '<-'를 누르면 주인공 객체 오른쪽이동
+	case 75:
+		for(i=0;i<dim;i++){
+			for(l=dim;l>0;l--){
+				if(vet[i][l]==2){                             
+					if(l<dim-2){
+						vet[i][l]=0;
+						vet[i][l+1]=2;
+
+					}
+				}
+			}
+		}
+
+		break;
+		//아스키코드가 53인 스페이스바를 누르면 주인공 객체 총알 발사
+	case 53:
+		for(i=0;i<dim;i++){
+			for(l=0;l<dim;l++){                           
+				if(vet[i][l]==2){
+					vet[i-1][l]=1;
+					if (sound==1){
+					}
+
+				}
+			}
+		}
+
+		break;
+	default:
+		if (sound==1){
+		}
+
+	}
+
+}
+
 // 폭발하고 그 폭발을 삭제하는 기능
 void explosion(int vet[dim][dim])
 {
