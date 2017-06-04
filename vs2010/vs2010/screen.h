@@ -1,5 +1,7 @@
 #define dim 18
 
+void RemoveCursor(void);
+
 void sleep_mil(unsigned int ms);
 
 void clear_screen ( void );
